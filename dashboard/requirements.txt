@@ -1,0 +1,7 @@
+boto
+botocore
+boto3
+fbprophet
+pandas
+plotly
+streamlit
