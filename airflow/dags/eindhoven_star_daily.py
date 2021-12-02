@@ -53,34 +53,6 @@ def save_data_to_s3(star_data):
     LOGGER.info("airflow.task >>> Successfully uploaded STAR data to S3")
 
 
-# def get_data_from_s3():
-#     from io import StringIO    
-#     LOGGER = logging.getLogger("airflow.task")
-#     LOGGER.info("airflow.task >>> save_data_to_s3")  
-    
-#     FILE_NAME = "/opt/airflow/temp_data.json"
-
-#     s3 = boto3.client('s3')
-#     with open('FILE_NAME', 'wb') as file:
-#         try:
-#             s3.download_fileobj('BUCKET_NAME', S3_STAGING_KEY, file)
-#         except Exception as e:
-#             LOGGER.info("airflow.task >>> Error downloading file>> {}".format(e)) 
-#             pass
-#     json_buffer = StringIO()
-
-#     star_data.to_json(json_buffer)
-
-#     s3 = boto3.resource('s3')
-#     star_bucket = s3.Bucket(S3_BUCKET)
-#     s3_key = S3_STAGING_KEY.format('star_data')
-#     try:
-#         star_bucket.put_object(Key=s3_key, Body=json_buffer.getvalue())
-#     except Exception as e:
-#         LOGGER.info("airflow.task >>> Error >> {}".format(e)) 
-#         pass
-#     LOGGER.info("airflow.task >>> Successfully uploaded STAR data to S3")
-
 def get_rain_temperature_data(**context):
     import pandas as pd
 
@@ -223,7 +195,7 @@ def store_in_db(ti, **context):
 
     try:
         conn = psycopg2.connect(
-            host="postgres.cmhr0fj42wel.eu-west-3.rds.amazonaws.com",
+            host="postgres.xxxxxxxxxxxx.xx-xxxx-x.rds.amazonaws.com",
             database="postgres",
             user="postgres",
             password="postgres")
@@ -239,10 +211,6 @@ def store_in_db(ti, **context):
             avg_temp INTEGER,
             avg_rain INTEGER)""")
         conn.commit()
-        # f = open("all_output.json", 'r')           
-        # data = json.load(f)
-        # f.close()
-        # data = json.loads(data)
         psycopg2.extras.execute_batch(cur, """
             INSERT INTO starTemp(date, avg_no2, avg_pm10, avg_laeq, avg_temp, avg_rain) VALUES (
                 %(date)s,

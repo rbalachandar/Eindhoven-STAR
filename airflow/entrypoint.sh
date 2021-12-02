@@ -48,7 +48,7 @@ wait_for_port() {
 # Other executors than SequentialExecutor drive the need for an SQL database, here PostgreSQL is used
 if [ "$AIRFLOW__CORE__EXECUTOR" = "LocalExecutor" ]; then
   # Default values corresponding to the default compose files
-  : "${POSTGRES_HOST:="airflow.cmhr0fj42wel.eu-west-3.rds.amazonaws.com"}"
+  : "${POSTGRES_HOST:="airflow.xxxxxxxxxxxx.xx-xxxx-x.rds.amazonaws.com"}"
   : "${POSTGRES_PORT:="5432"}"
   : "${POSTGRES_USER:="airflow"}"
   : "${POSTGRES_PASSWORD:="airflow"}"
